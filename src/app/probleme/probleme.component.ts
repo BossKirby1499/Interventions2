@@ -20,7 +20,12 @@ export class ProblemeComponent implements OnInit {
     this.problemeForm = this.fb.group({
       prenom:['',[ longueurMinimum.range(3), Validators.required]],
       nom:['',[ Validators.maxLength(50), Validators.required]],
-      noProbleme: ['',[Validators.required]]
+      noProbleme: ['',[Validators.required]],
+      courrielGroup: this.fb.group({
+        courriel: [{value: '', disabled: true}],
+        courrielConfirmation: [{value: '', disabled: true}],
+        }),
+       telephone: [{value: '', disabled: true}]
     });
 
     this.problemes.obtenirProbleme()
