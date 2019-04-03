@@ -33,6 +33,41 @@ export class ProblemeComponent implements OnInit {
                error => this.errorMessage = <any>error);  
 
   }
+  appliquerNotifications(typeNotif: string): void{
 
+    const CourrielControl = this.problemeForm.get('courrielGroup.courriel');
+    const CourrielConfirmControl = this.problemeForm.get('courrielGroup.courrielConfirmation');
+    const telephoneControl =this.problemeForm.get('telephone');
+
+    CourrielControl.clearValidators();
+    CourrielControl.reset();
+    CourrielControl.disable();  
+
+    CourrielConfirmControl.clearValidators();
+    CourrielConfirmControl.reset();
+    CourrielConfirmControl.disable();  
+
+    telephoneControl.clearValidators();
+    telephoneControl.reset();
+    telephoneControl.disable();  
+
+   if(typeNotif === 'courriel'){
+    CourrielControl.setValidators([Validators.required]);
+    CourrielControl.enable();
+    CourrielConfirmControl.setValidators([Validators.required]);
+    CourrielConfirmControl.enable();
+   }else{
+
+      if(typeNotif === 'telephone'){
+        telephoneControl.enable();
+        telephoneControl.setValidators([Validators.required]);
+       
+      }
+
+   }
+   CourrielControl.updateValueAndValidity();
+   CourrielConfirmControl.updateValueAndValidity();
+   telephoneControl.updateValueAndValidity();
+  }
 
 }

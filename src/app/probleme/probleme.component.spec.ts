@@ -69,5 +69,25 @@ describe('ProblemeComponent', () => {
     
     expect(zone.valid).toBeFalsy();
   });
-
+  it(' Zone TELEPHONE est désactivée quand ne pas me notifier', () => {
+    component.appliquerNotifications('nepasnotifier');
+    let zone = component.problemeForm.get('telephone');
+    expect(zone.status).toEqual('DISABLED');
+  });
+  it(' Zone TELEPHONE est vide quand ne pas me notifier', () => {
+    component.appliquerNotifications('nepasmeNotifier');
+    let zone = component.problemeForm.get('telephone');
+    zone.setValue('');
+    expect(zone.value).toEqual('');
+  });
+  it('Zone ADRESSE COURRIEL est désactivée quand ne pas me notifier', () => {
+    component.appliquerNotifications('nepasmeNotifier');
+    let zone = component.problemeForm.get('courrielGroup.courriel');
+    expect(zone.status).toEqual('DISABLED');
+  });
+  it('Zone CONFIRMER COURRIEL est désactivée quand ne pas me notifier', () => {
+    component.appliquerNotifications('nepasmeNotifier');
+    let zone = component.problemeForm.get('courrielGroup.courrielConfirmation');
+    expect(zone.status).toEqual('DISABLED');
+  });
 });
