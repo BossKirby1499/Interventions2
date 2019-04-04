@@ -106,7 +106,7 @@
               problemeForm.get('noProbleme').dirty) &&
               (!problemeForm.get('noProbleme').valid )}">
             
-            <option value="">Séléctionner une catégorie de problème </option>
+            <option value="">Sélectionner une catégorie de problème </option>
             <option *ngFor="let cat of typeProbleme" [value]="cat.id">{{cat.descriptionTypeProbleme}}</option>
             
           </select>

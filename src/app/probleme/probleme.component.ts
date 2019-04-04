@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ValidatorFn } from '@angular/forms';
 import { longueurMinimum } from '../shared/longueur-minimum/longueur-minimum.component';
 import { TypeproblemeService } from './typeprobleme.service';
 import { ITypeProbleme } from './typeprobleme';
+import { emailMatcherValidator } from '../shared/email-matcher/email-matcher.component';
 
 @Component({
   selector: 'inter-probleme',
@@ -37,6 +38,7 @@ export class ProblemeComponent implements OnInit {
 
     const CourrielControl = this.problemeForm.get('courrielGroup.courriel');
     const CourrielConfirmControl = this.problemeForm.get('courrielGroup.courrielConfirmation');
+    const courrielGroupControl = this.problemeForm.get('courrielGroup');
     const telephoneControl =this.problemeForm.get('telephone');
 
     CourrielControl.clearValidators();
@@ -52,10 +54,14 @@ export class ProblemeComponent implements OnInit {
     telephoneControl.disable();  
 
    if(typeNotif === 'courriel'){
-    CourrielControl.setValidators([Validators.required]);
+    CourrielControl.setValidators([Validators.required,Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+')]);
     CourrielControl.enable();
     CourrielConfirmControl.setValidators([Validators.required]);
     CourrielConfirmControl.enable();
+             // ...Validators.compose([classeDuValidateur.NomDeLaMethode()])])
+             courrielGroupControl.setValidators([Validators.compose([emailMatcherValidator.courrielDifferents()])])
+    
+
    }else{
 
       if(typeNotif === 'telephone'){
